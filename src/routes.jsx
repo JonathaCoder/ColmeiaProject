@@ -5,9 +5,10 @@ import Home from "./pages/Home/home";
 import Clientes from "./pages/Clientes/clientes";
 import Estoque from "./pages/Estoque/estoque";
 import Enter from "./pages/Enter/enter";
+import HomeUser from "./pages/PagesUser/HomeUser/homeUser";
 import Exit from "./pages/Exit/exit";
 import ControleEstoque from "./pages/ControleEstoque/controleEstoque";
-
+import CampanhaForm from "./pages/PagesUser/Campanhas/campanhasForm";
 function PrivateRoute({ element, authenticated }) {
   return authenticated ? (
     element
@@ -47,6 +48,24 @@ function RoutesApp() {
           element={
             <PrivateRoute
               element={<Clientes />}
+              authenticated={authenticated}
+            />
+          }
+        />
+         <Route
+          path="/campanha"
+          element={
+            <PrivateRoute
+              element={<CampanhaForm />}
+              authenticated={authenticated}
+            />
+          }
+        />
+          <Route
+          path="/HomeUser"
+          element={
+            <PrivateRoute
+              element={<HomeUser />}
               authenticated={authenticated}
             />
           }

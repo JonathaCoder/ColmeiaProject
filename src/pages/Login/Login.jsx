@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import logo from "../../img/logoTIpo.jpg"
 import logo3 from "../../img/logo3.png";
+import { Token } from "@mui/icons-material";
 
 function Login({authenticateUser}) {
   const [email, setEmail] = useState("");
@@ -25,50 +26,56 @@ function Login({authenticateUser}) {
   const handleMouseDownPassword = (event) => event.preventDefault();
   useEffect(() => {
     const token = localStorage.getItem("token");
-
+    const userEmail = localStorage.getItem("userEmail"); // Retrieve user's email from localStorage
+  
     if (token) {
-      authenticateUser(); 
-      navigate("/home");
+      authenticateUser(); // Assuming token-based authentication
+      if (userEmail === "rh@gmail.com") {
+        navigate("/home");
+      } else if (userEmail === "user@gmail.com") {
+        navigate("/homeUser");
+      }
+    } else {
+      // Handle case when token is not present or invalid
+      // You might want to redirect to a login page or display an error message
     }
   }, [authenticateUser, navigate]);
-
-
-
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (!email || !password) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
-
+  
     try {
       const response = await axios.post("http://localhost:3000/login", {
         email,
         password,
       });
-
+  
       if (response.data.token) {
         const { token } = response.data;
         localStorage.setItem("token", token);
-        navigate("/home");
+        localStorage.setItem("userEmail", email); // Store user's email in localStorage
+        if (email === "rh@gmail.com") {
+          navigate("/home");
+        } else {
+          navigate("/homeUser");
+        }
         toast.success("Login bem-sucedido");
       }
     } catch (error) {
-      handleLoginError(error);
-    }
-  };
-
-  const handleLoginError = (error) => {
-    if (error.response) {
-      if (error.response.status === 401) {
-        toast.error("Email ou senha inválidos");
+      if (error.response) {
+        if (error.response.status === 401) {
+          toast.error("Email ou senha inválidos");
+        } else {
+          toast.error("Erro no servidor. Tente novamente mais tarde.");
+        }
       } else {
-        toast.error("Erro no servidor. Tente novamente mais tarde.");
+        toast.error("Erro na requisição. Verifique sua conexão.");
       }
-    } else {
-      toast.error("Erro na requisição. Verifique sua conexão.");
     }
   };
 

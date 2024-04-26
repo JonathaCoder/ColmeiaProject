@@ -120,7 +120,7 @@ a:active:hover {
   justify-content: center;
   align-items: center;
   margin: 10px;
-  color: #f8f8f8;
+  color: #000000;
   font-size: 25px;
 }
 .icon_btn:hover {
@@ -130,10 +130,15 @@ a:active:hover {
 .header_home {
   display: flex;
 
-  background-color: #0c0c0c;
+  background-color: #f6f6f6;
 }
 .home_header {
   width: 100%;
+  
+}
+.home_header img {
+   height: 130px;
+  
 }
 .logo {
   position: absolute;
@@ -626,7 +631,7 @@ a, a:link, a:visited, a:active{
   margin: 0px 20px;
 }
 .btn-agenda{
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 19px;
 }
 .container-Text{
@@ -690,4 +695,22 @@ height: 190px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.AreaCampanhas{
+  border: 1px solid black;
+  width:90%;
+  margin: 20px 35px;
+  border-radius: 15px;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e7e7e73d;
+  box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.172) ;
+}
+.campanhas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
